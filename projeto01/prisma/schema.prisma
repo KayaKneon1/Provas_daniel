@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model ListaUsuarios {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  idade Int
+}
+
+model Usuario {
+  id         Int       @id @default(autoincrement())
+  nome       String
+  email      String    @unique
+  senhaHash  String
+  createdAt  DateTime  @default(now())
+  sessoes    Sessao[]
+  contas     Conta[]
+  categorias Categoria[]
+  lancamentos Lancamento[]
+}
+
+model Sessao {
+  id        Int      @id @default(autoincrement())
+  tokenHash String   @unique
+  expiresAt DateTime
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([expiresAt])
+}
+
+model Conta {
+  id                   Int          @id @default(autoincrement())
+  nome                 String
+  tipo                 String
+  saldoInicialCentavos Int
+  usuarioId            Int
+  usuario              Usuario      @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  lancamentos          Lancamento[]
+
+  @@index([usuarioId])
+}
+
+model Categoria {
+  id          Int          @id @default(autoincrement())
+  nome        String
+  tipo        String
+  usuarioId   Int
+  usuario     Usuario      @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  lancamentos Lancamento[]
+
+  @@unique([nome, tipo, usuarioId])
+  @@index([usuarioId])
+}
+
+model Lancamento {
+  id            Int       @id @default(autoincrement())
+  descricao     String
+  valorCentavos Int
+  data          DateTime
+  tipo          String
+  usuarioId     Int
+  contaId       Int
+  categoriaId   Int
+  usuario       Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  conta         Conta     @relation(fields: [contaId], references: [id], onDelete: Restrict)
+  categoria     Categoria @relation(fields: [categoriaId], references: [id], onDelete: Restrict)
+
+  @@index([usuarioId, data])
+  @@index([contaId])
+  @@index([categoriaId])
+}

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f7f3" />
+    <title>Meu Norte — Controle financeiro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/main.js" defer></script>
+  </head>
+  <body>
+    <main id="tela-autenticacao" class="tela-autenticacao">
+      <section class="cartao-autenticacao" aria-labelledby="titulo-autenticacao">
+        <a class="marca marca-autenticacao" href="/" aria-label="Meu Caixa, início">
+          <span class="icone-marca" aria-hidden="true">M</span>
+          <span>meu<span class="marca-destaque">Norte</span></span>
+        </a>
+        <p class="rotulo-superior">SUAS FINANÇAS, MAIS CLARAS</p>
+        <h1 id="titulo-autenticacao">Bom ter você por aqui.</h1>
+        <p id="descricao-autenticacao" class="texto-discreto">
+          Entre para acompanhar sua vida financeira.
+        </p>
+        <form id="formulario-autenticacao" class="formulario-empilhado">
+          <label id="campo-nome" class="campo oculto">
+            <span>Seu nome</span>
+            <input name="nome" autocomplete="name" maxlength="80" />
+          </label>
+          <label class="campo">
+            <span>E-mail</span>
+            <input
+              name="email"
+              type="email"
+              autocomplete="email"
+              maxlength="254"
+              required
+            />
+          </label>
+          <label class="campo">
+            <span>Senha</span>
+            <input
+              name="senha"
+              type="password"
+              autocomplete="current-password"
+              minlength="8"
+              maxlength="128"
+              required
+            />
+          </label>
+          <p id="erro-autenticacao" class="erro-formulario" role="alert"></p>
+          <button
+            id="botao-autenticacao"
+            class="botao botao-principal botao-largo"
+            type="submit"
+          >
+            Entrar
+          </button>
+        </form>
+        <p class="alternar-autenticacao">
+          <span id="texto-alternar-autenticacao">Ainda não tem cadastro?</span>
+          <button id="alternar-autenticacao" class="botao-texto" type="button">
+            Criar conta
+          </button>
+        </p>
+      </section>
+      <aside class="painel-lateral-autenticacao">
+        <div class="ilustracao-lateral" aria-hidden="true">
+          <div class="orbita-ilustracao orbita-um"></div>
+          <div class="orbita-ilustracao orbita-dois"></div>
+          <div class="cartao-ilustracao">
+            <span>saldo total</span><strong>R$ 8.420,50</strong
+            ><i>↗ 12,8% este mês</i>
+          </div>
+          <div class="ponto-ilustracao ponto-um"></div>
+          <div class="ponto-ilustracao ponto-dois"></div>
+          <div class="ponto-ilustracao ponto-tres"></div>
+        </div>
+        <div class="texto-lateral">
+          <p class="rotulo-superior">UM PASSO DE CADA VEZ</p>
+          <h2>Organizar hoje.<br />Respirar melhor amanhã.</h2>
+          <p>
+            Reúna contas, receitas e despesas em um só lugar e tenha mais
+            clareza sobre suas escolhas.
+          </p>
+        </div>
+      </aside>
+    </main>
+
+    <div id="tela-aplicacao" class="tela-aplicacao oculto">
+      <aside class="barra-lateral">
+        <a class="marca" href="/" aria-label="Meu Caixa, início">
+          <span class="icone-marca" aria-hidden="true">M</span>
+          <span>meu<span class="marca-destaque">norte</span></span>
+        </a>
+        <p class="rotulo-navegacao">MENU</p>
+        <nav id="navegacao-principal" class="navegacao-principal" aria-label="Navegação principal">
+          <button class="link-navegacao ativo" data-view="inicio" type="button">
+            <span class="icone-navegacao">⌂</span> Visão geral
+          </button>
+          <button class="link-navegacao" data-view="contas" type="button">
+            <span class="icone-navegacao">▤</span> Contas
+          </button>
+          <button class="link-navegacao" data-view="categorias" type="button">
+            <span class="icone-navegacao">◈</span> Categorias
+          </button>
+          <button class="link-navegacao" data-view="lancamentos" type="button">
+            <span class="icone-navegacao">↕</span> Lançamentos
+          </button>
+        </nav>
+        <div class="rodape-barra-lateral">
+          <div class="aviso-privacidade">
+            <span class="icone-privacidade">✓</span
+            ><span
+              ><strong>Seus dados são seus</strong
+              ><small>Privados e protegidos</small></span
+            >
+          </div>
+          <button id="botao-sair" class="botao-sair" type="button">
+            <span>↪</span> Sair da conta
+          </button>
+        </div>
+      </aside>
+
+      <section class="area-trabalho">
+        <header class="barra-superior">
+          <div>
+            <p class="rotulo-superior">CONTROLE FINANCEIRO PESSOAL</p>
+            <p id="boas-vindas" class="boas-vindas">Olá!</p>
+          </div>
+          <div class="perfil">
+            <span id="inicial-perfil" class="avatar-perfil">M</span
+            ><span id="nome-perfil"></span>
+          </div>
+        </header>
+        <main id="conteudo" class="conteudo" tabindex="-1"></main>
+      </section>
+    </div>
+
+    <dialog id="dialogo-registro" class="dialogo-registro">
+      <form id="formulario-registro" method="dialog">
+        <div class="cabecalho-dialogo">
+          <div>
+            <p class="rotulo-superior">MEU CAIXA</p>
+            <h2 id="titulo-dialogo">Novo registro</h2>
+          </div>
+          <button
+            id="fechar-dialogo"
+            class="botao-icone"
+            type="button"
+            aria-label="Fechar"
+          >
+            ×
+          </button>
+        </div>
+        <div id="campos-dialogo" class="formulario-empilhado"></div>
+        <p id="erro-dialogo" class="erro-formulario" role="alert"></p>
+        <div class="acoes-dialogo">
+          <button id="cancelar-dialogo" class="botao botao-secundario" type="button">
+            Cancelar</button
+          ><button id="salvar-dialogo" class="botao botao-principal" type="submit">
+            Salvar registro
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <div id="notificacao" class="notificacao" role="status" aria-live="polite"></div>
+  </body>
+</html>
